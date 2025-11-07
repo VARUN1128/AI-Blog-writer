@@ -107,7 +107,7 @@ def save_blogs():
     with open(BLOGS_FILE, 'w', encoding='utf-8') as f:
         json.dump(blogs, f, ensure_ascii=False, indent=2)
 
-# Load blogs on startup
+
 load_blogs()
 
 def generate_blog_content(title: str) -> str:
@@ -217,5 +217,6 @@ async def clear_blogs():
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    port = int(os.getenv("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
 
