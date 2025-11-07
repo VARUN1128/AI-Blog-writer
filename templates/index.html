@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Blog Generator</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🤖 AI Blog Generator</h1>
+            <p class="subtitle">Generate engaging blog posts using AI</p>
+        </header>
+
+        <main>
+            <div class="card">
+                <h2>Enter Blog Titles</h2>
+                <p class="instruction">Enter one blog title per line. The AI will generate comprehensive content for each title.</p>
+                
+                {% if error %}
+                <div class="error-message">
+                    {{ error }}
+                </div>
+                {% endif %}
+
+                <form method="POST" action="/generate">
+                    <div class="form-group">
+                        <label for="titles">Blog Titles (one per line):</label>
+                        <textarea 
+                            id="titles" 
+                            name="titles" 
+                            rows="10" 
+                            placeholder="Example:&#10;The Future of Artificial Intelligence&#10;How to Build a Successful Startup&#10;10 Tips for Better Productivity"
+                            required
+                        ></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary">Generate Blogs</button>
+                </form>
+            </div>
+
+            {% if blogs %}
+            <div class="card">
+                <p class="info">You have {{ blogs|length }} blog(s) generated. <a href="/blog">View all blogs →</a></p>
+            </div>
+            {% endif %}
+        </main>
+    </div>
+</body>
+</html>
+

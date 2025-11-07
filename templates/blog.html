@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generated Blogs - AI Blog Generator</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📝 Generated Blogs</h1>
+            <a href="/" class="btn-back">← Back to Home</a>
+        </header>
+
+        <main>
+            {% if blogs %}
+                <div class="blog-count">
+                    <p>Total Blogs: <strong>{{ blogs|length }}</strong></p>
+                    <form method="POST" action="/clear-blogs" style="display: inline-block; margin-top: 10px;" onsubmit="return confirm('Are you sure you want to delete all blogs? This action cannot be undone.');">
+                        <button type="submit" class="btn-clear">🗑️ Clear All Blogs</button>
+                    </form>
+                </div>
+
+                {% for blog in blogs %}
+                <article class="blog-card">
+                    <h2 class="blog-title">{{ blog.title }}</h2>
+                    <div class="blog-content">
+                        {{ blog.content|replace('\n', '<br>')|safe }}
+                    </div>
+                </article>
+                {% endfor %}
+            {% else %}
+                <div class="card">
+                    <p class="empty-state">No blogs generated yet. <a href="/">Go to homepage</a> to generate your first blog!</p>
+                </div>
+            {% endif %}
+        </main>
+    </div>
+</body>
+</html>
+
